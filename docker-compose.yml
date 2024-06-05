@@ -5,8 +5,10 @@ services:
     container_name: djangoapp
     build:
       context: .
+      args:
+        MAINTAINER_EMAIL: ${MAINTAINER_EMAIL}
     ports:
-      - "127.0.0.1:8000:8000"
+      - "8000:8000"
     volumes:
       - ./djangoapp:/djangoapp
       - ./data/web/static:/data/web/static/
@@ -15,6 +17,7 @@ services:
       - ./dotenv_files/.env
     depends_on:
       - psql
+
   psql:
     container_name: psql
     image: postgres:13-alpine
